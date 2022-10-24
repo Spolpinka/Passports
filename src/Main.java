@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Random;
 
 public class Main {
@@ -27,9 +28,9 @@ public class Main {
         Passport solomon = new Passport(existNumb, "Цукерман", "Соломон", "Абрамович",
                 LocalDate.now().minusYears(20));
         firstBook.addPassport(solomon);
-        for (Passport p :
-                firstBook.getPassports()) {
-            System.out.println(p);
+        for (Map.Entry<Integer, Passport> entry :
+                firstBook.getPassports().entrySet()) {
+            System.out.println(entry.getValue());
         }
     }
 }

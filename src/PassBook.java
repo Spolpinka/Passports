@@ -1,41 +1,32 @@
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class PassBook {
-    private Set<Passport> passports;
+    private HashMap<Integer, Passport> passports;
 
     public PassBook() {
-        passports = new HashSet<>();
+        passports = new HashMap<>();
     }
 
     public void addPassport(Passport... passport) {
         for (Passport p :
                 passport) {
-            if (!passports.add(p)) {
+            if (passports.containsKey(p.getPassNumber()) && passports.get(p.getPassNumber()).equals(p)) {
                 System.out.println("Паспорт уже зарегистрирован!");
-            } else if (sameNumber(p) != null ) {
-                Passport pass = sameNumber(p);
-                pass.setLastName(p.getLastName());
-                pass.setFirstName(p.getFirstName());
-                pass.setMiddleName(p.getMiddleName());
-                pass.setBirthDate(p.getBirthDate());
+            } else if (passports.containsKey(p.getPassNumber())) {
+                passports.get(p.getPassNumber()).setLastName(p.getLastName());
+                passports.get(p.getPassNumber()).setFirstName(p.getFirstName());
+                passports.get(p.getPassNumber()).setMiddleName(p.getMiddleName());
+                passports.get(p.getPassNumber()).setBirthDate(p.getBirthDate());
             } else {
-
+                passports.put(p.getPassNumber(), p);
             }
         }
     }
 
-    public Set<Passport> getPassports() {
+    public HashMap<Integer, Passport> getPassports() {
         return passports;
-    }
-
-    private Passport sameNumber(Passport passport) {
-        for (Passport p :
-                passports) {
-            if (p.getPassNumber() == passport.getPassNumber()) {
-                return p;
-            }
-        }
-        return null;
     }
 }
