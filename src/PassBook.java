@@ -13,13 +13,14 @@ public class PassBook {
     public void addPassport(Passport... passport) {
         for (Passport p :
                 passport) {
-            if (passports.containsKey(p.getPassNumber()) && passports.get(p.getPassNumber()).equals(p)) {
+            Passport finded = passports.get(p.getPassNumber());
+            if (passports.containsKey(p.getPassNumber()) && finded.equals(p)) {
                 System.out.println("Паспорт уже зарегистрирован!");
             } else if (passports.containsKey(p.getPassNumber())) {
-                passports.get(p.getPassNumber()).setLastName(p.getLastName());
-                passports.get(p.getPassNumber()).setFirstName(p.getFirstName());
-                passports.get(p.getPassNumber()).setMiddleName(p.getMiddleName());
-                passports.get(p.getPassNumber()).setBirthDate(p.getBirthDate());
+                finded.setLastName(p.getLastName());
+                finded.setFirstName(p.getFirstName());
+                finded.setMiddleName(p.getMiddleName());
+                finded.setBirthDate(p.getBirthDate());
             } else {
                 passports.put(p.getPassNumber(), p);
             }
